@@ -1,14 +1,15 @@
 import { Request, Response } from 'express';
 import Anthropic from '@anthropic-ai/sdk';
 import * as fs from 'fs';
+import * as path from 'path';
 import ffmpeg from 'fluent-ffmpeg';
 import { buildVideoPrompt, VideoAnalysisContext } from '../prompts/videoPrompt';
 
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
 function extractFrame(videoPath: string, framePath: string): Promise<void> {
-  const folder = framePath.substring(0, framePath.lastIndexOf('/'));
-  const filename = framePath.substring(framePath.lastIndexOf('/') + 1);
+  const folder = path.dirname(framePath);
+  const filename = path.basename(framePath);
   return new Promise((resolve, reject) => {
     ffmpeg(videoPath)
       .screenshots({ timestamps: [0], filename, folder })
