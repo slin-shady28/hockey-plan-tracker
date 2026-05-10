@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import multer from 'multer';
 import { validatePlanRequest } from './middleware/validate';
 import { handleGeneratePlan } from './routes/generatePlan';
+import { handleAnalyzeVideo } from './routes/analyzeVideo';
 
 dotenv.config();
 
@@ -14,6 +15,7 @@ app.use(cors());
 app.use(express.json());
 
 app.post('/generate-plan', validatePlanRequest, handleGeneratePlan);
+app.post('/analyze-video', upload.single('video'), handleAnalyzeVideo);
 
 const PORT = process.env.PORT ?? 3001;
 app.listen(PORT, () => console.log(`Backend running on port ${PORT}`));
