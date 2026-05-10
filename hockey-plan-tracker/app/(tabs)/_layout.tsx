@@ -1,22 +1,14 @@
 import { Tabs } from 'expo-router';
 import { View, Text, StyleSheet } from 'react-native';
-import Animated, { useSharedValue, useAnimatedStyle, withTiming } from 'react-native-reanimated';
 import { Colors } from '../../theme/colors';
 
 function TabIcon({ name, focused }: { name: string; focused: boolean }) {
-  const glowOpacity = useSharedValue(focused ? 1 : 0);
-  glowOpacity.value = withTiming(focused ? 1 : 0, { duration: 200 });
-
-  const glowStyle = useAnimatedStyle(() => ({
-    opacity: glowOpacity.value,
-  }));
-
   return (
     <View style={styles.iconContainer}>
       <Text style={[styles.iconText, { color: focused ? Colors.accent : Colors.textMuted }]}>
         {name}
       </Text>
-      <Animated.View style={[styles.glowBar, glowStyle]} />
+      {focused && <View style={styles.glowBar} />}
     </View>
   );
 }
