@@ -1,0 +1,24 @@
+{
+  "expo": {
+    "name": "Hockey Plan Tracker",
+    "slug": "hockey-plan-tracker",
+    "scheme": "hockey-plan-tracker",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "backgroundColor": "#0A0E1A",
+    "plugins": [
+      "expo-router",
+      "expo-sqlite",
+      [
+        "expo-camera",
+        { "cameraPermission": "Allow Hockey Plan Tracker to use your camera to record technique videos." }
+      ],
+      [
+        "expo-image-picker",
+        { "photosPermission": "Allow Hockey Plan Tracker to access your videos." }
+      ]
+    ],
+    "android": { "adaptiveIcon": { "backgroundColor": "#0A0E1A" } }
+  }
+}
